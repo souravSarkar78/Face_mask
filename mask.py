@@ -8,19 +8,10 @@ face_mask = cv2.imread(face_mask)
 
 h_mask, w_mask = face_mask.shape[:2]
 
-cap = cv2.VideoCapture(1)
+cam = cv2.VideoCapture(0)
 
-#scaling_factor = 0.5
-
-filename = "viid.mp4"
-codec = cv2.VideoWriter_fourcc('M', 'P', 'E', 'G')
-framerate = 15
-resolution = (320, 240)
-video = cv2.VideoWriter(filename, codec, framerate, resolution)
-
-a = 0
 while True:
-    ret, frame = cap.read()
+    ret, frame = cam.read()
 
     frame = cv2.resize(frame, None, fx = 0.5, fy = 0.5, interpolation= cv2.INTER_AREA)
 
@@ -62,17 +53,9 @@ while True:
             frame[y:y+h, x:x+w] = cv2.add(masked_face, masked_frame)
 
     cv2.imshow('face_mask', frame)
-    video.write(frame)
-
-    a += 1
-    print(a)
-
-    if a==40:
-        break
-
+    
     if cv2.waitKey(1) == 32:
         break
 cv2.imwrite('face.jpg', frame)
 cv2.destroyAllWindows()
-video.release()
-cap.release()
+cam.release()
