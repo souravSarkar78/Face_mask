@@ -23,15 +23,16 @@ while True:
 
         #cv2.rectangle(frame, (x, y), (x+w, y+h), (0, 255, 0), 2)
 
-        if h > 0 and w> 0:
+             
+        if h > 0 and w > 0:
+            
+            #change the values according to the mask
             h, w = int(1.1*h), int(0.9 * w)
-
             y += int(0.005 * h)
             x -= int(0.01 * w)
 
-
-            #print(y)
-
+            #print(y, x)
+           
             frame_roi = frame[y:y+h, x:x+w]
             #print(frame[y:y+h, x:x+w])
 
